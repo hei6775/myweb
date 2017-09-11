@@ -1,0 +1,25 @@
+<!-- post.html  -->
+{% extends "base.html" %}
+{% block title %}hei6775的博客{% endblock %}
+{% block headmessage %}请撰写您的博客文章{% endblock%}
+{% block content %} 
+<div class='sdaasd'>
+{% for message in messages %}
+    <div class='alert alert-{{ message.tags }}'>{{message}}</div>
+{% endfor %}
+        <div class='panel panel-default'>
+            <form name='write blog' action='.' method='POST'>
+                {% csrf_token %}
+                <table>
+                {{write_form.media}}
+                {{ write_form.as_table }}
+                
+                </table>
+                <br />
+                <input type='submit' value='保存到后台'>
+                <input type='reset' value='清空重新输入'>
+            </form>
+        </div>
+        <br>
+</div>
+{% endblock %}

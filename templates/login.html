@@ -1,0 +1,33 @@
+<!-- login.html -->
+{% extends 'base.html' %}
+{% block title %} 登录 {% endblock %}
+{% block headmessage %} 
+    <h3 style='font-family:楷体;'>请登录您的帐号</a>
+{% endblock %}
+{% block content %} 
+<div class='container'>
+{% for message in messages %}
+    <div class='alert alert-{{ message.tags }}'>{{message}}</div>
+{% endfor %}
+<div class='row'>
+    <div class='col-md-12'>
+        <div class='panel panel-dafault'>
+            <div class='panel-heading' align=left>
+            <h3>登录您的帐号密码</h3>
+            </div>
+        </div>
+        <form action='.' method='POST'>
+            {% csrf_token %}
+                
+                <table>
+                    {{ login_form.as_table }}
+                </table>
+                <br />
+            <input type='submit' value='登录'>
+            <input type='reset' value='清空'>
+            <br />
+        </form>
+    </div>
+</div>
+
+{% endblock %}

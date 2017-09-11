@@ -13,9 +13,25 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.conf.urls import url,include
 from django.contrib import admin
+from mysite import views
+from DjangoUeditor import urls as djud_urls
+from django.conf import settings
+from captcha import urls
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^ueditor/',include(djud_urls)),
+    url(r'^captcha/',include('captcha.urls')),
+    url(r'^$',views.index),
+    url(r'^login/',views.login),
+    url(r'^logout/',views.logout),
+    url(r'^write/',views.write),
+    url(r'^postemail/',views.post_email),
+    url(r'^detail/(\d+)$',views.detail,name='detail-url'),
+    
 ]
+if settings.DEBUG:
+    from django.conf.urls.static import static
+    urlpatterns += static(settings.MEDIA_URL,document_root = settings.MEDIA_ROOT)

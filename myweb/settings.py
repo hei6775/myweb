@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 Django settings for myweb project.
 
@@ -25,8 +26,12 @@ SECRET_KEY = '#&3)e^6s#@y_a_u3fvcg@1ju$1zt#7bav%ym&s=^plcku%^7a6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
+#Mailgun settings
+EMAIL_BACKEND = 'django_mailgun.MailgunBackend'
+MAILGUN_ACCESS_KEY = 'key-a0d0fa0de904bed6df040d6a71202fd1'
+MAILGUN_SERVER_NAME = 'sandbox47c349b6fcbc4184920573b1f29f6006.mailgun.org'
 
 # Application definition
 
@@ -37,6 +42,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
+    'mysite',
+    'DjangoUeditor',
+    'captcha',
 ]
 
 MIDDLEWARE = [
@@ -54,7 +63,7 @@ ROOT_URLCONF = 'myweb.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR,'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -103,9 +112,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh-hans'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
@@ -118,3 +127,20 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+#STATIC_ROOT = os.path.join(BASE_DIR,'static')
+
+#static
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR,'static'),
+    os.path.join(BASE_DIR,'com_static'),
+    os.path.join(BASE_DIR,'media'),
+    ]
+    
+#upload floder
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+
+STATICFILES_FINDERS = ("django.contrib.staticfiles.finders.FileSystemFinder",
+                       "django.contrib.staticfiles.finders.AppDirectoriesFinder",)
+
+
